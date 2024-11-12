@@ -39,13 +39,14 @@ export default function Contact() {
                 <div className="mb-4 flex flex-col w-500">
 
                     <label htmlFor="form-name">Name </label>
-                    <input id="form-name" autoComplete="name" maxLength={50} size="lg" name="name" className="text-black"/>
+                    <input id="form-name" autoComplete="nombre" maxLength={50} size="lg" name="nombre" className="text-black"/>
 
                     <label htmlFor="form-email"> Email:</label>
-                    <input id="form-email" required autoComplete="email" maxLength={80} name="email" type="email" className="text-black"/>
-
+                    <input id="form-email" required autoComplete="correo" maxLength={80} name="correo" type="email" className="text-black"/>
+                    <label htmlFor="form-title"> Email:</label>
+                    <input id="form-tittle" required autoComplete="titulo"m axLength={50} size="lg"name="titulo"  className="text-black"/>
                     <label htmlFor="form-message"> Message: </label>
-                    <textarea id="form-message" required name="message" rows={5} className="text-black" />
+                    <textarea id="form-message" required name="descripcion" rows={5} className="text-black" />
 
                 </div>
                 <button className=" rounded bg-sky-400" type="submit">Send</button>

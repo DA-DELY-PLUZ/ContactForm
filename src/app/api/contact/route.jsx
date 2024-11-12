@@ -10,12 +10,12 @@ export async function POST(request) {
     const password = process.env.NEXT_PUBLIC_BURNER_PASSWORD;
     const myEmail = process.env.NEXT_PUBLIC_PERSONAL_EMAIL;
 
-
     console.log("dealing with request")
     const formData = await request.formData()
-    const name = formData.get('name')
-    const email = formData.get('email')
-    const message = formData.get('message')
+    const name = formData.get('nombre')
+    const email = formData.get('correo')
+    const message = formData.get('descripcion')
+    const title = formData.get('titulo')
 
 
     // create transporter object
@@ -40,7 +40,7 @@ export async function POST(request) {
             from: username,
             to: myEmail,
             replyTo: email,
-            subject: `Website activity from ${email}`,
+            subject: `${title}`,
             html: `
             <p>Name: ${name} </p>
             <p>Email: ${email} </p>
