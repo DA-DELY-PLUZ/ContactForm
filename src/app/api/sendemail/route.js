@@ -44,6 +44,6 @@ export async function POST(request) {
 
   } catch (error) {
     console.log(error);
-    return NextResponse.status(500).json({ message: "Error: No se pudo enviar el mensaje" });
+    return NextResponse.json({ message: "Error: No se pudo enviar el mensaje" }, { status: 500 });
   }
 }
