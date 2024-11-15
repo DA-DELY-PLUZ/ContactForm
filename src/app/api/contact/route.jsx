@@ -1,8 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server'
 const nodemailer = require('nodemailer');
 
-// Handles POST requests to /api
-
+// Maneja solicitudes POST a /api
 
 export async function POST(request) {
 
@@ -10,15 +9,14 @@ export async function POST(request) {
     const password = process.env.NEXT_PUBLIC_BURNER_PASSWORD;
     const myEmail = process.env.NEXT_PUBLIC_PERSONAL_EMAIL;
 
-    console.log("dealing with request")
-    const formData = await request.formData()
-    const name = formData.get('nombre')
-    const email = formData.get('correo')
-    const message = formData.get('descripcion')
-    const title = formData.get('titulo')
+    console.log("Procesando la solicitud");
+    const formData = await request.formData();
+    const name = formData.get('nombre');
+    const email = formData.get('correo');
+    const message = formData.get('descripcion');
+    const title = formData.get('titulo');
 
-
-    // create transporter object
+    // Crear objeto transportador
     const transporter = nodemailer.createTransport({
         host: "smtp-mail.outlook.com",
         port: 587,
@@ -28,7 +26,6 @@ export async function POST(request) {
         },
 
         auth: {
-
             user: username,
             pass: password
         }
@@ -42,18 +39,16 @@ export async function POST(request) {
             replyTo: email,
             subject: `${title}`,
             html: `
-            <p>Name: ${name} </p>
-            <p>Email: ${email} </p>
-            <p>Message: ${message} </p>
+            <p>Nombre: ${name} </p>
+            <p>Correo: ${email} </p>
+            <p>Mensaje: ${message} </p>
             `,
-        })
+        });
 
-        return NextResponse.json({ message: "Success: email was sent" })
+        return NextResponse.json({ message: "Éxito: el correo fue enviado" });
 
     } catch (error) {
-        console.log(error)
-        NextResponse.status(500).json({ message: "COULD NOT SEND MESSAGE" })
+        console.log(error);
+        return NextResponse.status(500).json({ message: "Error: No se pudo enviar el mensaje" });
     }
-
-
 }

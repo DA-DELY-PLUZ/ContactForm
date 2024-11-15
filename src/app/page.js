@@ -8,7 +8,7 @@ export default function Home() {
 
       <main className="flex min-h-screen flex-col items-center" >
         <div className="relative flex place-items-center p-5 bg-white text-black">
-        <Link href="/contact">Contact Me</Link>
+        <Link href="/contact">Contactame</Link>
         </div>
   
 
