@@ -7,7 +7,7 @@ export async function POST(request) {
 
   const emailConfig = {
     from: formData.get('correo'),
-    to: username,
+    to: process.env.NEXT_PUBLIC_EMAIL_USERNAME,
     replyTo: formData.get('correo'),
     subject: formData.get('titulo'),
     html: `
