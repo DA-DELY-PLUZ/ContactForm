@@ -36,9 +36,11 @@ export async function POST(request) {
   });
 
   try {
-    await transporter.sendMail({
+    const send = await transporter.sendMail({
       ...emailConfig,
     });
+
+    console.log(send)
 
     return NextResponse.json({ message: "Éxito: el correo fue enviado" });
 
