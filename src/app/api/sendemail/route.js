@@ -23,19 +23,7 @@ export async function POST(request) {
   }
 
   // Crear objeto transportador
-  const transporter = nodemailer.createTransport({
-    host: process.env.NEXT_PUBLIC_EMAIL_HOST,
-    port: process.env.NEXT_PUBLIC_EMAIL_PORT,
-    requireTLS: false,
-    secure: false,
-    ignoreTLS: true,
-    authMethod: "PLAIN",
-    auth: {
-      user: process.env.NEXT_PUBLIC_EMAIL_USERNAME,
-      pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
-      type: "LOGIN"
-    }
-  });
+  const transporter = nodemailer.createTransport("smtp://contacto.comunatrib%40pjedomex.gob.mx:C0ntacto_24%24@10.22.247.12:25?auto_tls=false&verify_peer=0&encryption=none");
 
   try {
     const send = await transporter.sendMail({
