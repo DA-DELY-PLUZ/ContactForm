@@ -5,7 +5,6 @@ export async function POST(request) {
 
   const formData = await request.formData();
 
-  console.log(formData)
   const emailConfig = {
     from: formData.get('correo'),
     to: username,
