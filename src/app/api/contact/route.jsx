@@ -1,54 +1,50 @@
 import { NextResponse, NextRequest } from 'next/server'
 const nodemailer = require('nodemailer');
 
-// Maneja solicitudes POST a /api
-
 export async function POST(request) {
 
-    const username = process.env.NEXT_PUBLIC_BURNER_USERNAME;
-    const password = process.env.NEXT_PUBLIC_BURNER_PASSWORD;
-    const myEmail = process.env.NEXT_PUBLIC_PERSONAL_EMAIL;
+  const formData = await request.formData();
 
-    console.log("Procesando la solicitud");
-    const formData = await request.formData();
-    const name = formData.get('nombre');
-    const email = formData.get('correo');
-    const message = formData.get('descripcion');
-    const title = formData.get('titulo');
+  console.log(formData)
+  const emailConfig = {
+    from: formData.get('correo'),
+    to: username,
+    replyTo: formData.get('correo'),
+    subject: formData.get('titulo'),
+    html: `
+            <p>Nombre: ${formData.get('nombre')} </p>
+            <p>Correo: ${formData.get('correo')} </p>
+            <p>Mensaje: ${formData.get('descripcion')} </p>
+            `,
+    text: `
+            Nombre: ${formData.get('nombre')}
+            Correo: ${formData.get('correo')}
+            Mensaje: ${formData.get('descripcion')}
+            `
+  }
 
-    // Crear objeto transportador
-    const transporter = nodemailer.createTransport({
-        host: "smtp-mail.outlook.com",
-        port: 587,
-        tls: {
-            ciphers: "SSLv3",
-            rejectUnauthorized: false,
-        },
+  // Crear objeto transportador
+  const transporter = nodemailer.createTransport({
+    host: process.env.NEXT_PUBLIC_EMAIL_HOST,
+    port: process.env.NEXT_PUBLIC_EMAIL_PORT,
+    requireTLS: false,
+    secure: false,
+    ignoreTLS: true,
+    auth: {
+      user: process.env.NEXT_PUBLIC_EMAIL_USERNAME,
+      pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD
+    }
+  });
 
-        auth: {
-            user: username,
-            pass: password
-        }
+  try {
+    await transporter.sendMail({
+      ...emailConfig,
     });
 
-    try {
+    return NextResponse.json({ message: "Éxito: el correo fue enviado" });
 
-        const mail = await transporter.sendMail({
-            from: username,
-            to: myEmail,
-            replyTo: email,
-            subject: `${title}`,
-            html: `
-            <p>Nombre: ${name} </p>
-            <p>Correo: ${email} </p>
-            <p>Mensaje: ${message} </p>
-            `,
-        });
-
-        return NextResponse.json({ message: "Éxito: el correo fue enviado" });
-
-    } catch (error) {
-        console.log(error);
-        return NextResponse.status(500).json({ message: "Error: No se pudo enviar el mensaje" });
-    }
+  } catch (error) {
+    console.log(error);
+    return NextResponse.status(500).json({ message: "Error: No se pudo enviar el mensaje" });
+  }
 }

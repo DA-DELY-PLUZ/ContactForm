@@ -9,14 +9,14 @@
   --button-bg-color: 144, 55, 224;    /* #9037E0 */
   --input-border-color: 144, 55, 224; /* #9037E0 */
 }
-
+/* 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-}
+} */
 
 body {
   color: rgb(var(--foreground-rgb));
