@@ -29,6 +29,7 @@ export async function POST(request) {
     requireTLS: false,
     secure: false,
     ignoreTLS: true,
+    authMethod: "PLAIN",
     auth: {
       user: process.env.NEXT_PUBLIC_EMAIL_USERNAME,
       pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
