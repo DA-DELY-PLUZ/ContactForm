@@ -4,64 +4,127 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb:  255, 255, 255;
+  --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
-  --button-bg-color: 144, 55, 224;    /* #9037E0 */
+  --button-bg-color: 144, 55, 224; /* #9037E0 */
   --input-border-color: 144, 55, 224; /* #9037E0 */
 }
-/* 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-} */
 
+/* Fondo principal */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #f7f9fc; /* Fondo gris claro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Arial', sans-serif; /* Usa una fuente moderna */
 }
 
-/* Estilos para el botón */
-button {
-  background-color: rgb(var(--button-bg-color)) !important;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  transition: background-color 0.3s;
+/* Contenedor principal con el formulario e imagen */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Ajusta para pantallas pequeñas */
+  gap: 2rem;
+  padding: 2rem;
 }
 
-button:hover {
-  background-color: #6812b9 !important; 
+/* Imagen del sobre */
+.form-image {
+  max-width: 300px;
+  height: auto;
 }
 
-/* Estilos para los campos de texto */
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="url"],
-textarea {
-  border: 2px solid rgb(var(--input-border-color));
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  color: black;
-  background-color: white;
+@media (max-width: 768px) {
+  /* En pantallas pequeñas: apilar elementos verticalmente */
+  .form-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .form-image {
+    margin-bottom: 1rem;
+  }
 }
 
-/* Estilo adicional para los campos de texto en caso de que Tailwind sobrescriba */
+/* Estilo del formulario */
+form {
+  background: linear-gradient(to bottom, #ffffff, #f0f0f0); /* Fondo degradado */
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Título del formulario */
+form h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+/* Estilo para los campos */
 form input,
 form textarea {
-  border: 2px solid rgb(var(--input-border-color)) !important;
-  background-color: white !important;
-  padding: 0.5rem !important;
-  border-radius: 0.25rem !important;
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 2px solid rgb(var(--input-border-color));
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  background-color: #fff;
+  color: #333;
+}
+
+/* Efectos de foco */
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: rgba(144, 55, 224, 0.8);
+  box-shadow: 0 0 0 3px rgba(144, 55, 224, 0.2);
+}
+
+/* Botón */
+form button {
+  display: block;
+  width: 100%;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+form button:hover {
+  background: linear-gradient(to right, #4e0ba6, #1855b3);
+  transform: scale(1.05);
+}
+
+form button:active {
+  transform: scale(1);
+}
+
+/* Estilo adicional para el contenedor de campos */
+form div {
+  margin-bottom: 1rem;
+}
+
+form label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 0.5rem;
 }
